@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anasayfa</title>
+</head>
+<body>
+    <h3>İlk Web Sayfası</h3>
+    <p>{{number}}</p>
+    <p>{{number2}}</p>
+</br>
+     
+    {% if message %}
+        <p>{{message}}</p>
+    {% else %}
+         <p>No Mesaj</p>
+    {% endif %}
+
+
+<ul>
+    {% for i in numbers %}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
+
+<form action="/toplam" method="post">
+
+    <input type="number" name = "number1"><br>
+    <input type="number" name = "number2"><br>
+    <button type = "submit">Gönder</button>
+
+</form>
+
+</body>
+</html>
