@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>People</title>
+</head>
+<body>
+    
+    <div style= "margin-top: 100px;" class="container">
+        <h3>Persons</h3>
+        <hr>
+
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Hometown</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Date of Death</th>
+              </tr>
+            </thead>
+             {% for person in  persons%}
+            <tbody>
+               
+                    <th scope="row"> {{person.id}}</th>
+                    <td>{{person.Name}}</td>
+                    <td>{{person.Surname}}</td>
+                    <td>{{person.Hometown}}</td>
+                    <td>{{person.Date_of_Birth}}</td>
+                    <td>{{person.Date_of_Death}}</td>
+            </tbody>
+           {% endfor %}
+        </table>
+
+
+        <br><br>
+
+        <div style= "margin-left: 25%;" class="container">
+            
+            {% for person in  persons%}
+            <div class="col-sm-6">
+              <div class="card">
+                <img class="card-img-top" style="size:1px" src="{{url_for('static', filename=person.img)}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{person.Name}} {{person.Surname}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i>Date of Birth:</i> {{person.Date_of_Birth.date().day}} {{person.Date_of_Birth.date().strftime("%B")}} {{person.Date_of_Birth.date().year}}</li>
+                    <li class="list-group-item"><i>Hometown:</i> {{person.Hometown}}</li>
+                    {% if person.Date_of_Death %}
+                        <li class="list-group-item"><i>Date of Death:</i>  {{person.Date_of_Death}}</li>
+                    {% else %}
+
+                    {% endif %}
+                    
+                     
+                  </ul>
+                  <div class="card-body">
+                  <h6 class="card-title">Parties: </h6>
+                   {% for i in  person.parties%}
+                   <li>{{party[i.party_id-1].Name}}, {{i.Date_Started.date().year}} 
+                   {% if i.Date_Ended%}
+                    - {{i.Date_Ended.date().year}}
+                    {% else %}
+                   </li>
+                   {% endif %}
+                   {% endfor %}
+                </div>
+                 
+              </div>
+            </div>
+            <br>
+            {% endfor %}
+            </div>
+          
+
+</div></div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
