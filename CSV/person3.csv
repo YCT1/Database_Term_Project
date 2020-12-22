@@ -1,0 +1,5 @@
+﻿id;Name;Surname;Hometown;Date_of_Birth;Date_of_Death;img
+1;Yekta Can;Tursun;Bursa;10.03.1999 00:00;;img/tursun.jpg
+2;Recep Tayip;Erdoğan;İstanbul;26.02.1954 00:00;;img/erdogan.jpg
+3;Kemal;Kılıçdaroğlu;Tunceli;17.12.1948 00:00;;img/kiliclaroglu.jpg
+4;Devlet;Bahçeli;Osmaniye;1.01.1948 00:00;;img/bahceli.jpg
