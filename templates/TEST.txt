@@ -1,0 +1,34 @@
+ALTER TABLE `databasehomework`.`members`
+ADD COLUMN `person` INT NULL AFTER `party`; 
+ADD CONSTRAINT `person`
+  FOREIGN KEY (`person`)
+  REFERENCES `databasehomework`.`persons` (`idpersons`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
+
+
+
+
+ALTER TABLE `databasehomework`.`members` 
+ADD COLUMN `person` INT NULL AFTER `party`;
+ALTER TABLE `databasehomework`.`members` 
+ADD CONSTRAINT `person`
+  FOREIGN KEY ()
+  REFERENCES `databasehomework`.`persons` ()
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
+
+
+ALTER TABLE `databasehomework`.`members` 
+ADD COLUMN `person` INT NULL AFTER `party`;
+ADD CONSTRAINT `person`
+  FOREIGN KEY ()
+  REFERENCES `databasehomework`.`persons` (`idpersons`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

@@ -10,12 +10,12 @@ CREATE TABLE Person
 
 CREATE TABLE Political_Party_Leader
 (
-  #LEADER_ID INT NOT NULL,
-  Date_Started DATE NOT NULL,
-  Date_Ended DATE NOT NULL,
-  #PERSON_ID INT NOT NULL,
-  PRIMARY KEY (#LEADER_ID),
-  FOREIGN KEY (#PERSON_ID) REFERENCES Person(#PERSON_ID),
+  leader_id INT,
+  Date_Started DATE,
+  Date_Ended DATE,
+  personid INT,
+  PRIMARY KEY (leader_id),
+  FOREIGN KEY (personid) REFERENCES person(idpersons),
   UNIQUE ()
 );
 

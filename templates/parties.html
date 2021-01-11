@@ -8,7 +8,7 @@
 <body>
     
     <div style= "margin-top: 100px;" class="container">
-        <h3>Persons</h3>
+        <h3>Parties</h3>
         <hr>
 
 
@@ -17,10 +17,9 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Hometown</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Date of Death</th>
+                <th scope="col">Shortname</th>
+                <th scope="col">Foundation</th>
+                <th scope="col">Dissolution</th>
               </tr>
             </thead>
              {% for person in  persons%}
@@ -31,7 +30,6 @@
                     <td>{{person[2]}}</td>
                     <td>{{person[3]}}</td>
                     <td>{{person[4]}}</td>
-                    <td>{{person[5]}}</td>
             </tbody>
            {% endfor %}
         </table>
@@ -44,17 +42,18 @@
             {% for person in  persons%}
             <div class="col-sm-4">
               <div class="card">
-                <a href="persons/{{person[0]}}">
-                <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=person[6])}}" alt="Card image cap">
+                <a href="parties/{{person[2]}}">
+                <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=person[5])}}" alt="Card image cap">
               </a>
                 <div class="card-body">
-                  <h5 class="card-title">{{person[1]}} {{person[2]}}</h5>
+                  <h5 class="card-title">{{person[1]}}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i>Date of Birth:</i> {{person[4].day}} {{person[4].strftime("%B")}} {{person[4].year}}</li>
-                    <li class="list-group-item"><i>Hometown:</i> {{person[3]}}</li>
-                    {% if person[5] %}
-                        <li class="list-group-item"><i>Date of Death:</i>  {{person[5]}}</li>
+                  <li class="list-group-item"><i>Short Name:</i> {{person[2]}}</li>  
+                  <li class="list-group-item"><i>Foundation:</i> {{person[3].day}} {{person[3].strftime("%B")}} {{person[3].year}}</li>
+                    
+                    {% if person[4] %}
+                        <li class="list-group-item"><i>Dissolution:</i>  {{person[4].day}} {{person[4].strftime("%B")}} {{person[4].year}}</li>
                     {% else %}
 
                     {% endif %}
@@ -63,11 +62,7 @@
                   </ul>
                   <div class="card-body">
                   <h6 class="card-title">Parties: </h6>
-                  {% for member in  members%}
-                  {% if person[0]==member[4] %}
-                  <li>{{parties[member[3]-1][1]}}, {{member[1].year}} - {{member[2].year}}  </li>
-                  {% endif %}
-                  {% endfor %}
+                   
                 </div>
                  
               </div>
