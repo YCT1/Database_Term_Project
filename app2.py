@@ -17,7 +17,7 @@ mysql = MySQL(app)
 @app.route('/persons')
 def users():
     cur = db.cursor()
-    cur.execute("SELECT * FROM persons")
+    cur.execute("SELECT * FROM persons ORDER BY name")
     persons = cur.fetchall()
     cur.execute("SELECT * FROM members")
     members = cur.fetchall()
@@ -28,7 +28,7 @@ def users():
 @app.route('/parties')
 def parties():
     cur = db.cursor()
-    cur.execute("SELECT * FROM parties")
+    cur.execute("SELECT * FROM parties ORDER BY foundation DESC")
     persons = cur.fetchall()
     return render_template('parties.html', persons=persons)
 
@@ -57,6 +57,21 @@ def d_individual_persons(id):
     
     return render_template("ind_person.html", person = person, members = members)
 
+@app.route("/elections")
+def elections():
+    cur = db.cursor()
+    cur.execute("SELECT * FROM presidentialelect")
+    elections = cur.fetchall()
+    return render_template("elections.html", elections = elections)
+
+@app.route("/elections/<string:id>")
+def ind_elections(id):
+    cur = db.cursor() 
+    cur.execute("SELECT * FROM presidentialcand INNER JOIN persons ON (presidentialcand.personId=persons.idpersons) WHERE (election = " + str(id) + ")")
+    candicates = cur.fetchall()
+    cur.execute("SELECT * FROM presidentialelect WHERE (id=1) ")
+    election = cur.fetchone()
+    return render_template("ind_presidential_election.html",candicates=candicates, election=election )
 
 if __name__ == '__main__':
     app.run(debug=True)
