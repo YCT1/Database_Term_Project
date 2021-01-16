@@ -69,7 +69,7 @@ def ind_elections(id):
     cur = db.cursor() 
     cur.execute("SELECT * FROM presidentialcand INNER JOIN persons ON (presidentialcand.personId=persons.idpersons) WHERE (election = " + str(id) + ")")
     candicates = cur.fetchall()
-    cur.execute("SELECT * FROM presidentialelect WHERE (id=1) ")
+    cur.execute("SELECT * FROM presidentialelect WHERE (id="+str(id)+") ")
     election = cur.fetchone()
     return render_template("ind_presidential_election.html",candicates=candicates, election=election )
 
