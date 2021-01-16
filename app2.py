@@ -39,7 +39,9 @@ def d_individual_parties(id):
     cur.execute("SELECT * FROM parties WHERE idParties ="+str(id))
     party = cur.fetchone()
 
-    return render_template("ind_party.html", party = party)
+    cur.execute("SELECT * FROM members INNER JOIN persons ON members.person = persons.idpersons WHERE party ="+str(id))
+    members = cur.fetchall()
+    return render_template("ind_party.html", party = party, members = members)
 
 
 @app.route("/persons/<string:id>")

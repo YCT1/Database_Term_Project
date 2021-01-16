@@ -47,7 +47,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{party[1]}}</h4>
                         <h6 class="card-title">{{party[2]}}</h6>
-                      </div>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><i>Foundation:</i> {{party[3].day}} {{party[3].strftime("%B")}} {{party[3].year}}</li>
@@ -57,7 +57,13 @@
                     </ul>
 
 
+                    <div class="card-body">
+                        <h6 class="card-title">Members: </h6>
+                        {% for member in  members%}
+                        <li><a href="/persons/{{member[5]}}">{{member[6]}} {{member[7]}}</a>, {{member[1].year}} - {{member[2].year}}</li>
+                        {% endfor %}
 
+                    </div>
 
 
 
