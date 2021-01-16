@@ -3,8 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>People</title>
+    <title>{{party[2]}}</title>
 </head>
+
 
 <div style= "margin-top: 10px;" class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,46 +34,35 @@
 
 
 
-
-
-
-
-
-
-
 <body>
 
     <div style= "margin-top: 100px;" class="container">
-        <h3>{{person[1]}} {{person[2]}}</h3>
+        <h3>{{party[1]}}</h3>
         <hr>
 
         <div style= "margin-left: 35%;" class="container">
             <div class="col-sm-4">
                 <div class="card">
-                    <a href="">
-                        <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=person[6])}}" alt="Card image cap">
-                    </a>
+                    <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[5])}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{party[1]}}</h4>
+                        <h6 class="card-title">{{party[2]}}</h6>
+                      </div>
+
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i>Date of Birth:</i> {{person[4].day}} {{person[4].strftime("%B")}} {{person[4].year}}</li>
-                        <li class="list-group-item"><i>Hometown:</i> {{person[3]}}</li>
-                        {% if person[5] %}
-                            <li class="list-group-item"><i>Date of Death:</i>  {{person[5]}}</li>
-                        {% else %}
-    
+                        <li class="list-group-item"><i>Foundation:</i> {{party[3].day}} {{party[3].strftime("%B")}} {{party[3].year}}</li>
+                        {% if party[4] %}
+                            <li class="list-group-item"><i>Dissolution:</i> {{party[4].day}} {{party[4].strftime("%B")}} {{party[4].year}}</li>
                         {% endif %}
-                        
-                         
                     </ul>
 
-                    <div class="card-body">
-                        <h6 class="card-title">Parties: </h6>
-                    
-              
-                        {% for member in  members%}
-                            <li><a href="/parties/{{member[5]}}">{{member[6]}}</a>, {{member[1].year}} - {{member[2].year}} </li>
-                        {% endfor %}
 
-                    </div>
+
+
+
+
+
+
                 </div>
              
 

@@ -6,8 +6,34 @@
     <title>People</title>
 </head>
 <body>
-    
-    <div style= "margin-top: 100px;" class="container">
+
+  <div style= "margin-top: 10px;" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Main Page</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/persons">Persons</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/parties">Parties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/elections">Elections</a>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
+  </div>
+
+
+
+
+    <div style= "margin-top: 20px;" class="container">
         <h3>Persons</h3>
         <hr>
 
@@ -65,7 +91,7 @@
                   <h6 class="card-title">Parties: </h6>
                   {% for member in  members%}
                   {% if person[0]==member[4] %}
-                  <li>{{parties[member[3]-1][1]}}, {{member[1].year}} - {{member[2].year}}  </li>
+                  <li><a href="/parties/{{parties[member[3]-1][0]}}">{{parties[member[3]-1][1]}}</a>, {{member[1].year}} - {{member[2].year}}  </li>
                   {% endif %}
                   {% endfor %}
                 </div>
