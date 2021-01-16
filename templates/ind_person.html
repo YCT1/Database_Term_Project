@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>People</title>
+</head>
+
+
+<body>
+
+    <div style= "margin-top: 100px;" class="container">
+        <h3>{{person[1]}} {{person[2]}}</h3>
+        <hr>
+
+        <div style= "margin-left: 35%;" class="container">
+            <div class="col-sm-4">
+                <div class="card">
+                    <a href="">
+                        <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=person[6])}}" alt="Card image cap">
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i>Date of Birth:</i> {{person[4].day}} {{person[4].strftime("%B")}} {{person[4].year}}</li>
+                        <li class="list-group-item"><i>Hometown:</i> {{person[3]}}</li>
+                        {% if person[5] %}
+                            <li class="list-group-item"><i>Date of Death:</i>  {{person[5]}}</li>
+                        {% else %}
+    
+                        {% endif %}
+                        
+                         
+                    </ul>
+
+                    <div class="card-body">
+                        <h6 class="card-title">Parties: </h6>
+                    </div>
+              
+                      {% for member in  members%}
+                      
+                      <li>{{member[6]}}, {{member[1].year}} - {{member[2].year}} </li>
+                      {% endfor %}
+                </div>
+             
+
+            </div>
+        
+        
+        </div>
+
+
+    </div>
+</body>

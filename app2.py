@@ -42,15 +42,21 @@ def individual_parties(id):
             return "<h1>"+str(x[1])+ "</h1>"
     return "Not found"
 
+
+
 @app.route("/persons/<string:id>")
-def individual_persons(id):
+def d_individual_persons(id):
     cur = db.cursor()
-    cur.execute("SELECT * FROM persons")
-    persons = cur.fetchall()
-    for x in persons:
-        if(int(x[0]) == int(id)):
-            return "<h1>"+str(x[1])+" "+str(x[2])+ "</h1>"
-    return "Not found"
+    cur.execute("SELECT * FROM persons WHERE (idpersons = " + str(id) + ")")
+    person = cur.fetchone()
+
+    cur.execute("SELECT * FROM members INNER JOIN parties ON members.party = parties.idParties WHERE (person = " + str(id) + ")")
+    members = cur.fetchall()
+
+    
+    
+    return render_template("ind_person.html", person = person, members = members)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
