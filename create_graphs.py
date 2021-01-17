@@ -71,3 +71,27 @@ while i<len(candicates):
     adress = "static/" + str(candicates[i][0]) + "_presidential_graph.svg"
     plt.savefig(adress)
     i = i + 1
+
+i = 1
+cur = db.cursor()
+cur.execute("SELECT id FROM generalelections")
+electionData = cur.fetchall()
+while i < 4:
+    cur = db.cursor()
+    cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(i)+")")
+    results = cur.fetchall()
+
+    data = []
+    partName = []
+    explode=[]
+    for x in results:
+        data.append(x[0])
+        partName.append(x[1] + " : " + str(x[0]))
+        explode.append(0.05)
+
+    fig = plt.figure(figsize =(7, 7))
+    plt.title('TBMM Seat') 
+    plt.pie(data,explode=explode, labels = partName, autopct='%1.2f%%')
+    adress = "static/" + str(i) + "_general_election_graph.svg"
+    plt.savefig(adress)
+    i = i + 1 

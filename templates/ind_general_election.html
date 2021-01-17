@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>{{election[1].day}} {{election[1].strftime("%B")}} {{election[1].year}}</title>
+</head>
+
+<div style= "margin-top: 10px;" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Main Page</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/persons">Persons</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/parties">Parties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/elections">Elections</a>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
+  </div>
+
+
+    <body>
+        <div style= "margin-top: 100px;" class="container">
+            <h3>General Election of {{election[1].day}} {{election[1].strftime("%B")}} {{election[1].year}}</h3>
+            <hr>
+            
+            <div style= "margin-left: 35%;" class="container">
+                <div class="col-sm-4">
+                    
+                    {% for result in  results%}
+                    <div class="card">
+                        <a href="/parties/{{result[6]}}">
+                          <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=result[5])}}" alt="Card image cap">
+                          <br></a>
+                        <a href="/persons/{{result[10]}}">  
+                          <img width="256" height="256" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=result[9])}}" alt="Card image cap">
+                        </a>
+            
+                        <div class="card-body">
+                          <h4>{{result[3]}}</h4>
+                          <h6>{{result[7]}} {{result[8]}}</h6>
+                        </div>
+            
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><i>Vote Number:</i> {{"{:,}".format(result[1])}}</li>
+                          <li class="list-group-item"><i>Percantage:</i> {{result[0]}}%</li>
+                          <li class="list-group-item"><i>Seat:</i> {{result[2]}}</li>
+                        </ul>
+                      
+                      </div>
+                      <br>
+                      {% endfor %}
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <img width="700" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=election[0])}}_general_election_graph.svg" alt="Card image cap">
+    </body>

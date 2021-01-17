@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Presidential Elections</title>
+    <title>Elections</title>
 </head>
 
 <div style= "margin-top: 10px;" class="container">
@@ -48,7 +48,7 @@
                         </ul>
                     </a>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i>Total People Who Voted: </i>{{"{:,}".format(election[2])}}</li>
+                        <li class="list-group-item"><i>Eligible to Voted: </i>{{"{:,}".format(election[2])}}</li>
                         <li class="list-group-item"><i>Turnout: </i>{{election[3]}}%</li>
                     </ul>
                 </div>
@@ -58,6 +58,32 @@
             </div>
         
         </div>
+
+        <h3>General Election Elections</h3>
+        <hr>
+
+        <div style= "margin-left: 35%;" class="container">
+          <div class="col-sm-4">
+
+              {% for election in  generalElections%}
+              
+              <div class="card">
+                  <a href = "elections/general/{{election[0]}}" style="color: rgb(37, 37, 37);">
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><h3>{{election[1].day}} {{election[1].strftime("%B")}} {{election[1].year}}</h3></li>
+                      </ul>
+                  </a>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><i>Eligible to Voted: </i>{{"{:,}".format(election[2])}}</li>
+                      <li class="list-group-item"><i>Turnout: </i>{{election[3]}}%</li>
+                  </ul>
+              </div>
+              <br>
+              {% endfor %}
+
+          </div>
+      
+      </div>
     </div>
 </body>
 

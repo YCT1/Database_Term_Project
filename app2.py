@@ -62,7 +62,10 @@ def elections():
     cur = db.cursor()
     cur.execute("SELECT * FROM presidentialelect")
     elections = cur.fetchall()
-    return render_template("elections.html", elections = elections)
+
+    cur.execute("SELECT * FROM generalelections ORDER BY date DESC")
+    generalElections = cur.fetchall()
+    return render_template("elections.html", elections = elections, generalElections=generalElections)
 
 @app.route("/elections/<string:id>")
 def ind_elections(id):
@@ -72,6 +75,17 @@ def ind_elections(id):
     cur.execute("SELECT * FROM presidentialelect WHERE (id="+str(id)+") ")
     election = cur.fetchone()
     return render_template("ind_presidential_election.html",candicates=candicates, election=election )
+
+@app.route("/elections/general/<string:id>")
+def ind_general_elections(id):
+    cur = db.cursor()
+    Command = "SELECT percantage,vote,seat,parties.name,shortname, parties.img,parties.idParties, persons.name, persons.surname, persons.img,persons.idpersons FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) INNER JOIN persons ON (ge_result.personid = persons.idpersons) WHERE(election="+str(id)+")"
+    cur.execute(Command)
+    results = cur.fetchall()
+
+    cur.execute("SELECT * FROM generalelections WHERE (id ="+ str(id)+" )")
+    election = cur.fetchone()
+    return render_template("ind_general_election.html", results = results,election=election)
 
 if __name__ == '__main__':
     app.run(debug=True)
