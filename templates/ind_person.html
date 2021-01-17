@@ -37,9 +37,6 @@
 
 
 
-
-
-
 <body>
 
     <div style= "margin-top: 100px;" class="container">
@@ -73,6 +70,19 @@
                         {% endfor %}
 
                     </div>
+
+                    {% if elections %}
+                    <div class="card-body">
+                      <h6 class="card-title">Presidential Elections: </h6>
+                  
+            
+                      {% for election in  elections%}
+                          <li><a href="/elections/{{election[2]}}">{{election[1].day}} {{election[1].strftime("%B")}} {{election[1].year}}</a>, {{election[0]}}% </li>
+                      {% endfor %}
+
+                    </div>
+                    {% endif %}
+
                 </div>
              
 
@@ -83,4 +93,8 @@
 
 
     </div>
+
+    {% if elections %}
+    <img width="512" height="512" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=person[0])}}_presidential_graph.svg" alt="Card image cap">
+    {% endif %}
 </body>

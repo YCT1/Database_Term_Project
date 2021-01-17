@@ -50,12 +50,12 @@ def d_individual_persons(id):
     cur.execute("SELECT * FROM persons WHERE (idpersons = " + str(id) + ")")
     person = cur.fetchone()
 
-    cur.execute("SELECT * FROM members INNER JOIN parties ON members.party = parties.idParties WHERE (person = " + str(id) + ")")
+    cur.execute("SELECT * FROM members INNER JOIN parties ON members.party = parties.idParties WHERE (person = " + str(id) + ") ORDER BY started")
     members = cur.fetchall()
 
-    
-    
-    return render_template("ind_person.html", person = person, members = members)
+    cur.execute("SELECT result_percantage, date,presidentialelect.id FROM presidentialcand INNER JOIN presidentialelect ON (presidentialcand.election=presidentialelect.id) WHERE (personId = " + str(id) + ")")
+    elections = cur.fetchall()
+    return render_template("ind_person.html", person = person, members = members, elections=elections)
 
 @app.route("/elections")
 def elections():
@@ -67,7 +67,7 @@ def elections():
 @app.route("/elections/<string:id>")
 def ind_elections(id):
     cur = db.cursor() 
-    cur.execute("SELECT * FROM presidentialcand INNER JOIN persons ON (presidentialcand.personId=persons.idpersons) WHERE (election = " + str(id) + ")")
+    cur.execute("SELECT * FROM presidentialcand INNER JOIN persons ON (presidentialcand.personId=persons.idpersons) WHERE (election = " + str(id) + ") ORDER BY result_percantage DESC")
     candicates = cur.fetchall()
     cur.execute("SELECT * FROM presidentialelect WHERE (id="+str(id)+") ")
     election = cur.fetchone()
