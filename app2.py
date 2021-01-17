@@ -28,7 +28,7 @@ def users():
 @app.route('/parties')
 def parties():
     cur = db.cursor()
-    cur.execute("SELECT * FROM parties ORDER BY foundation DESC")
+    cur.execute("SELECT * FROM parties ORDER BY name")
     persons = cur.fetchall()
     return render_template('parties.html', persons=persons)
 
@@ -41,7 +41,10 @@ def d_individual_parties(id):
 
     cur.execute("SELECT * FROM members INNER JOIN persons ON members.person = persons.idpersons WHERE party ="+str(id))
     members = cur.fetchall()
-    return render_template("ind_party.html", party = party, members = members)
+
+    cur.execute("SELECT percantage, seat, date, generalelections.id FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(id)+")")
+    elections = cur.fetchall()
+    return render_template("ind_party.html", party = party, members = members, elections=elections)
 
 
 @app.route("/persons/<string:id>")

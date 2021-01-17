@@ -64,19 +64,24 @@
                         {% endfor %}
 
                     </div>
+                    {% if elections %}
+                    <div class="card-body">
+                      <h6 class="card-title">General Elections: </h6>
+                      {% for election in  elections%}
+                      <li><a href="/elections/general/{{election[3]}}"> {{election[2].day}} {{election[2].strftime("%B")}} {{election[2].year}}</a> {{election[0]}}% Seat: {{election[1]}}</li>
+                      {% endfor %}
 
-
-
-
-
+                    </div>
+                    {% endif %}
                 </div>
-             
-
             </div>
-        
-        
         </div>
-
-
     </div>
+
+
+
+    {% if elections %}
+    <img width="700" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_graph.svg" alt="Card image cap">
+    <img width="700" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_p_graph.svg" alt="Card image cap">
+    {% endif %}
 </body>

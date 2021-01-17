@@ -76,7 +76,7 @@ i = 1
 cur = db.cursor()
 cur.execute("SELECT id FROM generalelections")
 electionData = cur.fetchall()
-while i < 4:
+while i < 6:
     cur = db.cursor()
     cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(i)+")")
     results = cur.fetchall()
@@ -94,4 +94,64 @@ while i < 4:
     plt.pie(data,explode=explode, labels = partName, autopct='%1.2f%%')
     adress = "static/" + str(i) + "_general_election_graph.svg"
     plt.savefig(adress)
-    i = i + 1 
+    i = i + 1
+
+
+cur = db.cursor()
+cur.execute("SELECT DISTINCT partyid FROM ge_result")
+parties = cur.fetchall()
+i = 0
+while i < len(parties):
+    cur = db.cursor()
+    cur.execute("SELECT percantage, seat, date, partyid FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(parties[i][0]) +")")
+    result = cur.fetchall()
+
+    year = []
+    seat = []
+    percantage = []
+    labels = []
+    for x in result:
+        year.append(str(x[2].year) +" "+ str(x[2].strftime("%B")))
+        seat.append(x[1])
+        percantage.append(x[0])
+
+    #Seat graph
+    fig2 = plt.figure() 
+
+    ax = fig2.add_axes([0.1,0.1,0.8,0.8])
+    ax.bar(year,seat,align='center', alpha=0.5)
+
+    plt.ylabel('Seat in TBMM')
+    plt.title('General Elections')
+    rects = ax.patches
+
+
+    for rect, seat in zip(rects, seat):
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width() / 2, height , seat,
+                ha='center', va='bottom')
+
+    adress = "static/" + str(parties[i][0]) + "_party_graph.svg"
+    plt.savefig(adress)
+
+    #Percantage Graph
+    fig2 = plt.figure() 
+
+    ax = fig2.add_axes([0.1,0.1,0.8,0.8])
+    ax.bar(year,percantage,align='center', alpha=0.5)
+
+    plt.ylabel('Pertange of Votes')
+    plt.title('General Elections')
+    rects = ax.patches
+
+
+    for rect, percantage in zip(rects, percantage):
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width() / 2, height , str(percantage) + "%",
+                ha='center', va='bottom')
+
+    adress = "static/" + str(parties[i][0]) + "_party_p_graph.svg"
+    plt.savefig(adress)
+
+
+    i = i + 1
