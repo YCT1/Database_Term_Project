@@ -58,7 +58,13 @@ def d_individual_persons(id):
 
     cur.execute("SELECT result_percantage, date,presidentialelect.id FROM presidentialcand INNER JOIN presidentialelect ON (presidentialcand.election=presidentialelect.id) WHERE (personId = " + str(id) + ")")
     elections = cur.fetchall()
-    return render_template("ind_person.html", person = person, members = members, elections=elections)
+
+    cur.execute("SELECT * FROM ge_result WHERE(personid=" + str(id) + ")")
+    isJoinedGeneralElection = cur.fetchall()
+    generalElection = False
+    if isJoinedGeneralElection:
+        generalElection = True
+    return render_template("ind_person.html", person = person, members = members, elections=elections, generalElection=generalElection)
 
 @app.route("/elections")
 def elections():
@@ -90,6 +96,13 @@ def ind_general_elections(id):
     election = cur.fetchone()
     return render_template("ind_general_election.html", results = results,election=election)
 
+@app.route("/graphs")
+def graphs():
+    
+    cur = db.cursor()
+    cur.execute("SELECT id, date FROM generalelections")
+    elections = cur.fetchall()
+    return render_template("graphs.html", elections=elections)
 if __name__ == '__main__':
     app.run(debug=True)
 
