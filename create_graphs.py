@@ -163,7 +163,7 @@ cur.execute("SELECT idpersons FROM persons")
 persons = cur.fetchall()
 while i < len(persons):
     cur = db.cursor()
-    cur.execute("SELECT percantage, date, shortname FROM ge_result JOIN generalelections ON (ge_result.election = generalelections.id) JOIN parties ON (ge_result.partyid = parties.idParties) WHERE(personid="+ str(persons[i][0])+")")
+    cur.execute("SELECT percantage, date, shortname FROM ge_result JOIN generalelections ON (ge_result.election = generalelections.id) JOIN parties ON (ge_result.partyid = parties.idParties) WHERE(personid="+ str(persons[i][0])+") ORDER BY date DESC")
     results = cur.fetchall()
 
     year = []
