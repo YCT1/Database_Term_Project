@@ -76,7 +76,7 @@ i = 1
 cur = db.cursor()
 cur.execute("SELECT id FROM generalelections")
 electionData = cur.fetchall()
-while i < 9:
+while i < 10:
     cur = db.cursor()
     cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(i)+")")
     results = cur.fetchall()
