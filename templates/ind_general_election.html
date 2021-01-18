@@ -33,6 +33,11 @@
     <body>
         <div style= "margin-top: 100px;" class="container">
             <h3>General Election of {{election[1].day}} {{election[1].strftime("%B")}} {{election[1].year}}</h3>
+            {% if election[0] == 1%}
+            <h5 style="text-align: center;"><a href="/elections/general/{{election[0]+1}}">Previous Election</a>  : <a href="#">Next Election</a> </h5>
+            {% else %}
+            <h5 style="text-align: center;"><a href="/elections/general/{{election[0]+1}}">Previous Election</a>  : <a href="/elections/general/{{election[0]-1}}">Next Election</a> </h5>
+            {% endif %}
             <hr>
             
             <div style= "margin-left: 35%;" class="container">

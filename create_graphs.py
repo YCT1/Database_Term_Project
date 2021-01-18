@@ -76,7 +76,7 @@ i = 1
 cur = db.cursor()
 cur.execute("SELECT id FROM generalelections")
 electionData = cur.fetchall()
-while i < 6:
+while i < 9:
     cur = db.cursor()
     cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(i)+")")
     results = cur.fetchall()
@@ -103,7 +103,7 @@ parties = cur.fetchall()
 i = 0
 while i < len(parties):
     cur = db.cursor()
-    cur.execute("SELECT percantage, seat, date, partyid FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(parties[i][0]) +")")
+    cur.execute("SELECT percantage, seat, date, partyid FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(parties[i][0]) +") ORDER BY date DESC")
     result = cur.fetchall()
 
     year = []
@@ -111,7 +111,7 @@ while i < len(parties):
     percantage = []
     labels = []
     for x in result:
-        year.append(str(x[2].year) +" "+ str(x[2].strftime("%B")))
+        year.append(str(x[2].year) +"-"+ str(x[2].month))
         seat.append(x[1])
         percantage.append(x[0])
 
