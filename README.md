@@ -10,6 +10,6 @@ app.py
 create_graphs.py
 server.sql
 
-app.py runs the website
-create_graphs connects to server and gets necicary data then creates graphs and saves to "static" file as .svg
-server.sql is all sql command that used in this project. All tables and data in there from 1977 to 2018
+app.py runs the website \n
+create_graphs connects to server and gets necicary data then creates graphs and saves to "static" file as .svg \n
+server.sql is all sql command that used in this project. All tables and data in there from 1977 to 2018 \n
