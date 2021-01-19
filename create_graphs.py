@@ -36,7 +36,7 @@ while electionNumber<3:
     plt.savefig(adress)
     electionNumber = electionNumber + 1
 
-
+print("Presidential Graphs.. DONE")
 cur = db.cursor()
 cur.execute("SELECT DISTINCT personId FROM presidentialcand")
 candicates = cur.fetchall()
@@ -72,31 +72,33 @@ while i<len(candicates):
     plt.savefig(adress)
     i = i + 1
 
+print("Presidential Candicate Graphs.. DONE")
 i = 1
 cur = db.cursor()
 cur.execute("SELECT id FROM generalelections")
 electionData = cur.fetchall()
-while i < 10:
+while i < len(electionData):
     cur = db.cursor()
-    cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(i)+")")
+    cur.execute("SELECT seat, shortname, election FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) WHERE (election="+ str(electionData[i][0])+")")
     results = cur.fetchall()
 
     data = []
     partName = []
     explode=[]
     for x in results:
-        data.append(x[0])
-        partName.append(x[1] + " : " + str(x[0]))
-        explode.append(0.05)
+        if x[0] != 0:
+            data.append(x[0])
+            partName.append(x[1] + " : " + str(x[0]))
+            explode.append(0.05)
 
     fig = plt.figure(figsize =(7, 7))
     plt.title('TBMM Seat') 
     plt.pie(data,explode=explode, labels = partName, autopct='%1.2f%%')
-    adress = "static/" + str(i) + "_general_election_graph.svg"
+    adress = "static/" + str(electionData[i][0]) + "_general_election_graph.svg"
     plt.savefig(adress)
     i = i + 1
 
-
+print("General Election TBMM Seat Graphs.. DONE")
 cur = db.cursor()
 cur.execute("SELECT DISTINCT partyid FROM ge_result")
 parties = cur.fetchall()
@@ -116,7 +118,7 @@ while i < len(parties):
         percantage.append(x[0])
 
     #Seat graph
-    fig2 = plt.figure() 
+    fig2 = plt.figure(figsize =(10, 5)) 
 
     ax = fig2.add_axes([0.1,0.1,0.8,0.8])
     ax.bar(year,seat,align='center', alpha=0.5)
@@ -135,7 +137,7 @@ while i < len(parties):
     plt.savefig(adress)
 
     #Percantage Graph
-    fig2 = plt.figure() 
+    fig2 = plt.figure(figsize =(10, 5)) 
 
     ax = fig2.add_axes([0.1,0.1,0.8,0.8])
     ax.bar(year,percantage,align='center', alpha=0.5)
@@ -156,7 +158,7 @@ while i < len(parties):
 
     i = i + 1
 
-
+print("General Election TBMM Seat Graphs.. DONE")
 i = 0
 cur = db.cursor()
 cur.execute("SELECT idpersons FROM persons")

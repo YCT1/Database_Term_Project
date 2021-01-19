@@ -7,7 +7,7 @@
   <rdf:RDF xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2021-01-18T15:15:02.162023</dc:date>
+    <dc:date>2021-01-19T15:00:32.375343</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -74,14 +74,6 @@ L 265.154945 258.160351
 L 352.090936 386.764812 
 z
 " style="fill:#9467bd;"/>
-   </g>
-   <g id="patch_7">
-    <path d="M 421.2936 254.52 
-C 421.2936 254.52 421.2936 254.52 421.2936 254.52 
-L 266.0616 254.52 
-L 421.2936 254.52 
-z
-" style="fill:#8c564b;"/>
    </g>
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
@@ -675,51 +667,6 @@ z
     </g>
    </g>
    <g id="text_11">
-    <!-- CHP : 0 -->
-    <g transform="translate(436.8168 257.279375)scale(0.1 -0.1)">
-     <defs>
-      <path d="M 64.40625 67.28125 
-L 64.40625 56.890625 
-Q 59.421875 61.53125 53.78125 63.8125 
-Q 48.140625 66.109375 41.796875 66.109375 
-Q 29.296875 66.109375 22.65625 58.46875 
-Q 16.015625 50.828125 16.015625 36.375 
-Q 16.015625 21.96875 22.65625 14.328125 
-Q 29.296875 6.6875 41.796875 6.6875 
-Q 48.140625 6.6875 53.78125 8.984375 
-Q 59.421875 11.28125 64.40625 15.921875 
-L 64.40625 5.609375 
-Q 59.234375 2.09375 53.4375 0.328125 
-Q 47.65625 -1.421875 41.21875 -1.421875 
-Q 24.65625 -1.421875 15.125 8.703125 
-Q 5.609375 18.84375 5.609375 36.375 
-Q 5.609375 53.953125 15.125 64.078125 
-Q 24.65625 74.21875 41.21875 74.21875 
-Q 47.75 74.21875 53.53125 72.484375 
-Q 59.328125 70.75 64.40625 67.28125 
-z
-" id="DejaVuSans-67"/>
-     </defs>
-     <use xlink:href="#DejaVuSans-67"/>
-     <use x="69.824219" xlink:href="#DejaVuSans-72"/>
-     <use x="145.019531" xlink:href="#DejaVuSans-80"/>
-     <use x="205.322266" xlink:href="#DejaVuSans-32"/>
-     <use x="237.109375" xlink:href="#DejaVuSans-58"/>
-     <use x="270.800781" xlink:href="#DejaVuSans-32"/>
-     <use x="302.587891" xlink:href="#DejaVuSans-48"/>
-    </g>
-   </g>
-   <g id="text_12">
-    <!-- 0.00% -->
-    <g transform="translate(343.317206 257.279375)scale(0.1 -0.1)">
-     <use xlink:href="#DejaVuSans-48"/>
-     <use x="63.623047" xlink:href="#DejaVuSans-46"/>
-     <use x="95.410156" xlink:href="#DejaVuSans-48"/>
-     <use x="159.033203" xlink:href="#DejaVuSans-48"/>
-     <use x="222.65625" xlink:href="#DejaVuSans-37"/>
-    </g>
-   </g>
-   <g id="text_13">
     <!-- TBMM Seat -->
     <g transform="translate(224.728125 54.48)scale(0.12 -0.12)">
      <defs>

@@ -33,8 +33,21 @@ def parties():
     return render_template('parties.html', persons=persons)
 
 
-@app.route("/parties/<string:id>")
+@app.route("/parties/<string:id>",methods=['GET', 'POST'])
 def d_individual_parties(id):
+    if request.method == 'POST':
+        userDetails = request.form
+        name = userDetails['name']
+        comment = userDetails['comment']
+
+        if name == "" or comment == "":
+            flash("Please fill your name or comment","error")
+        else:
+            today = datetime.now()
+            cur = db.cursor()
+            cur.execute("INSERT INTO comments(name, comment,datetime, categoryid, category) VALUES(%s, %s,%s,%s,%s)",(name, comment,today,2,id))
+            db.commit()
+            cur.close()
     cur = db.cursor()
     cur.execute("SELECT * FROM parties WHERE idParties ="+str(id))
     party = cur.fetchone()
@@ -44,7 +57,10 @@ def d_individual_parties(id):
 
     cur.execute("SELECT percantage, seat, date, generalelections.id FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(id)+") ORDER BY date DESC")
     elections = cur.fetchall()
-    return render_template("ind_party.html", party = party, members = members, elections=elections)
+
+    cur.execute("SELECT name,comment,datetime FROM comments WHERE(categoryid=2 AND category="+str(id)+")")
+    comments = cur.fetchall()
+    return render_template("ind_party.html", party = party, members = members, elections=elections, comments=comments)
 
 
 @app.route("/persons/<string:id>")
@@ -91,7 +107,7 @@ def ind_general_elections(id):
         userDetails = request.form
         name = userDetails['name']
         comment = userDetails['comment']
-        
+
         if name == "" or comment == "":
             flash("Please fill your name or comment","error")
         else:
@@ -132,6 +148,45 @@ def d_comment():
         cur.close()
     return render_template("index4.html")
 
+@app.route("/")
+def mainpage():
+    cur = db.cursor()
+    cur.execute("SELECT img,idParties FROM parties ORDER BY name")
+    parties = cur.fetchall()
+
+    table = []
+    
+    i = 0
+    while i < len(parties):
+        k = 0
+        row = []
+        row.clear()
+        while k < 5:
+            if i+k<len(parties):
+                row.append(parties[i+k])
+            k = k + 1
+        table.append(row)
+        i = i + k
+    
+
+    cur.execute("SELECT img,idpersons FROM persons ORDER BY name")
+    persons = cur.fetchall()
+
+    persontable = []
+    
+    i = 0
+    while i < len(persons):
+        k = 0
+        row = []
+        row.clear()
+        while k < 5:
+            if i+k<len(persons):
+                row.append(persons[i+k])
+            k = k + 1
+        persontable.append(row)
+        i = i + k
+    
+    return render_template("main.html" ,table=table,persontable=persontable)
 if __name__ == '__main__':
     app.run(debug=True)
 

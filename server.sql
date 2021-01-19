@@ -17,6 +17,26 @@
 CREATE DATABASE IF NOT EXISTS `databasehomework` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_turkish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `databasehomework`;
 
+-- Dumping structure for table databasehomework.comments
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `categoryid` int DEFAULT '0',
+  `category` int DEFAULT '0',
+  `name` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `comment` text COLLATE utf8_turkish_ci,
+  `datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+-- Dumping data for table databasehomework.comments: ~4 rows (approximately)
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` (`id`, `categoryid`, `category`, `name`, `comment`, `datetime`) VALUES
+	(3, 0, 0, 'fef', 'fesfe', '2021-01-19 00:00:00'),
+	(27, 2, 3, 'Yekta Can Tursun', 'MHP is <3', '2021-01-19 14:14:00'),
+	(28, 2, 16, 'Mesut Gün', 'ANAP is the best', '2021-01-19 14:16:18'),
+	(29, 2, 4, 'Hamdi ', 'Refahın vakti geldi', '2021-01-19 14:16:42');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+
 -- Dumping structure for table databasehomework.generalelections
 CREATE TABLE IF NOT EXISTS `generalelections` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -24,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `generalelections` (
   `voted` int DEFAULT '0',
   `Turnout` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.generalelections: ~8 rows (approximately)
+-- Dumping data for table databasehomework.generalelections: ~10 rows (approximately)
 /*!40000 ALTER TABLE `generalelections` DISABLE KEYS */;
 INSERT INTO `generalelections` (`id`, `date`, `voted`, `Turnout`) VALUES
 	(1, '2018-06-24', 59367469, 86.22),
@@ -37,7 +57,9 @@ INSERT INTO `generalelections` (`id`, `date`, `voted`, `Turnout`) VALUES
 	(6, '2002-11-03', 41407027, 79.14),
 	(7, '1999-04-18', 37495217, 87.09),
 	(8, '1995-12-24', 34155981, 85.2),
-	(9, '1991-10-20', 29979123, 83.9);
+	(9, '1991-10-20', 29979123, 83.9),
+	(10, '1987-11-29', 26376926, 93.3),
+	(12, '1977-06-05', 21207303, 72.4);
 /*!40000 ALTER TABLE `generalelections` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.ge_result
@@ -56,9 +78,9 @@ CREATE TABLE IF NOT EXISTS `ge_result` (
   CONSTRAINT `f2` FOREIGN KEY (`election`) REFERENCES `generalelections` (`id`),
   CONSTRAINT `FK_ge_result_persons` FOREIGN KEY (`personid`) REFERENCES `persons` (`idpersons`),
   CONSTRAINT `partyid` FOREIGN KEY (`partyid`) REFERENCES `parties` (`idParties`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.ge_result: ~40 rows (approximately)
+-- Dumping data for table databasehomework.ge_result: ~51 rows (approximately)
 /*!40000 ALTER TABLE `ge_result` DISABLE KEYS */;
 INSERT INTO `ge_result` (`id`, `percantage`, `vote`, `seat`, `personid`, `partyid`, `election`) VALUES
 	(1, 42.56, 21338693, 295, 1, 1, 1),
@@ -105,7 +127,17 @@ INSERT INTO `ge_result` (`id`, `percantage`, `vote`, `seat`, `personid`, `partyi
 	(42, 24.01, 5862623, 115, 19, 16, 9),
 	(43, 20.75, 5066571, 88, 22, 18, 9),
 	(44, 16.87, 4121355, 62, 14, 4, 9),
-	(45, 10.74, 2624301, 7, 17, 15, 9);
+	(45, 10.74, 2624301, 7, 17, 15, 9),
+	(46, 36.3, 8704335, 292, 23, 16, 10),
+	(47, 24.8, 5931000, 99, 22, 18, 10),
+	(48, 19.1, 4587062, 59, 21, 12, 10),
+	(49, 8.5, 2044576, 0, 17, 15, 10),
+	(50, 7.2, 1717425, 0, 14, 4, 10),
+	(51, 2.9, 701538, 0, 20, 19, 10),
+	(52, 41.4, 6136171, 213, 17, 2, 12),
+	(53, 36.9, 5468202, 189, 21, 20, 12),
+	(54, 8.6, 1269918, 24, 14, 21, 12),
+	(55, 6.4, 951544, 16, 20, 3, 12);
 /*!40000 ALTER TABLE `ge_result` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.members
@@ -121,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   CONSTRAINT `person` FOREIGN KEY (`person`) REFERENCES `persons` (`idpersons`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.members: ~32 rows (approximately)
+-- Dumping data for table databasehomework.members: ~37 rows (approximately)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
 INSERT INTO `members` (`members_id`, `started`, `ended`, `party`, `person`) VALUES
 	(1, '1983-12-23', '1998-12-23', 4, 1),
@@ -158,7 +190,11 @@ INSERT INTO `members` (`members_id`, `started`, `ended`, `party`, `person`) VALU
 	(32, '1993-01-18', '1997-01-18', 3, 20),
 	(33, '1987-01-18', '1993-01-18', 12, 21),
 	(34, '1985-01-18', '1995-01-18', 18, 22),
-	(35, '1995-01-18', '2001-01-18', 2, 22);
+	(35, '1995-01-18', '2001-01-18', 2, 22),
+	(36, '1983-01-19', '1989-01-19', 16, 23),
+	(37, '1987-01-19', '1993-01-19', 19, 20),
+	(38, '1962-01-19', '1981-01-19', 20, 21),
+	(39, '1970-10-11', '1981-01-19', 21, 14);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.parties
@@ -170,9 +206,9 @@ CREATE TABLE IF NOT EXISTS `parties` (
   `dissolution` date DEFAULT NULL,
   `img` varchar(45) COLLATE utf8_turkish_ci DEFAULT NULL,
   PRIMARY KEY (`idParties`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.parties: ~17 rows (approximately)
+-- Dumping data for table databasehomework.parties: ~19 rows (approximately)
 /*!40000 ALTER TABLE `parties` DISABLE KEYS */;
 INSERT INTO `parties` (`idParties`, `name`, `shortname`, `foundation`, `dissolution`, `img`) VALUES
 	(1, 'AK Parti', 'AKP', '2001-08-14', NULL, 'img/akp.jpg'),
@@ -192,7 +228,10 @@ INSERT INTO `parties` (`idParties`, `name`, `shortname`, `foundation`, `dissolut
 	(15, 'Demokratik Sol Parti', 'DSP', '1985-11-14', NULL, 'img/dsp.jpg'),
 	(16, 'Anavatan Partisi', 'ANAP', '1983-06-20', '2009-10-31', 'img/anap.jpg'),
 	(17, 'Fazilet Partisi', 'FP', '1997-12-17', '2001-06-22', 'img/fp.jpg'),
-	(18, 'Sosyaldemokrat Halkçı Parti', 'SHP', '1985-11-03', '1995-02-18', 'img/shp.jpg');
+	(18, 'Sosyaldemokrat Halkçı Parti', 'SHP', '1985-11-03', '1995-02-18', 'img/shp.jpg'),
+	(19, 'Miliyetçi Çalışma Partisi', 'MÇP', '1985-11-30', '1993-01-24', 'img/mcp.jpg'),
+	(20, 'Adalet Partisi', 'AP', '1961-01-19', '1981-10-16', 'img/ap.svg'),
+	(21, 'Milli Selamet Partisi', 'MSP', '1970-10-11', '1981-10-16', 'img/msp.jpg');
 /*!40000 ALTER TABLE `parties` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.persons
@@ -205,9 +244,9 @@ CREATE TABLE IF NOT EXISTS `persons` (
   `deathdate` date DEFAULT NULL,
   `img` varchar(45) COLLATE utf8_turkish_ci DEFAULT NULL,
   PRIMARY KEY (`idpersons`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.persons: ~20 rows (approximately)
+-- Dumping data for table databasehomework.persons: ~23 rows (approximately)
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
 INSERT INTO `persons` (`idpersons`, `name`, `surname`, `hometown`, `birthdate`, `deathdate`, `img`) VALUES
 	(1, 'Recep Tayyip', 'Erdoğan', 'İstanbul', '1954-02-26', NULL, 'img/erdogan.jpg'),
@@ -231,7 +270,8 @@ INSERT INTO `persons` (`idpersons`, `name`, `surname`, `hometown`, `birthdate`, 
 	(19, 'Ahmet Mesut', 'Yılmaz', 'İstanbul', '1947-11-06', '2020-10-30', 'img/yilmaz.jpg'),
 	(20, 'Alparslan', 'Türkeş', 'Lefkoşa', '1917-11-25', '1997-04-04', 'img/turkes.jpg'),
 	(21, 'Süleyman', 'Demirel', 'Isparta', '1924-11-01', '2015-06-17', 'img/demirel.jpg'),
-	(22, 'Erdal', 'İnönü', 'Ankara', '1926-06-06', '2007-10-31', 'img/erdal.jpg');
+	(22, 'Erdal', 'İnönü', 'Ankara', '1926-06-06', '2007-10-31', 'img/erdal.jpg'),
+	(23, 'Turgut', 'Özal', 'Ankara', '1927-10-13', '1993-04-17', 'img/ozal.jpg');
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.presidentialcand

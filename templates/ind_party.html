@@ -84,7 +84,54 @@
 
 
     {% if elections %}
-    <img width="700" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_graph.svg" alt="Card image cap">
-    <img width="700" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_p_graph.svg" alt="Card image cap">
+    <img width="1000" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_graph.svg" alt="Card image cap">
+    <img width="1000" height="700" style="display: block;margin-left: auto;margin-right: auto;" src="{{url_for('static', filename=party[0])}}_party_p_graph.svg" alt="Card image cap">
     {% endif %}
+
+    <div style= "margin-top: 100px;margin-left: 38%" class="container">
+      <div class="col-sm-4">
+      
+      {% if comments %}
+      <h3>Comments</h3>
+      {% for comment in  comments%}
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i>Name:</i> {{comment[0]}} , <i>Date:</i> {{comment[2]}}</li>
+            <li class="list-group-item">{{comment[1]}}</li>
+          </ul>
+        </div>
+        <br>
+      {% endfor %}
+      {% else %}
+      <h3>No comment here</h3>
+      {% endif %}  
+
+      <h5>Share your thoughts</h5>
+      <form method="POST" action="">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Enter you Name">
+          
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Your comment</label>
+          <textarea class="form-control" name="comment" rows="3"></textarea>
+          <small id="emailHelp" class="form-text text-muted">Please be respecfull each others</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 </body>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+      for (var i=0; i<messages.length; i++) {
+        alert(messages[i]);
+      }
+    </script>
+  {% endif %}
+{% endwith %}

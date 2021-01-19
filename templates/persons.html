@@ -36,38 +36,10 @@
 
 
 
-    <div style= "margin-top: 20px;" class="container">
+    <div style= "margin-top: 100px;" class="container">
         <h3>Persons</h3>
         <hr>
-
-
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Hometown</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Date of Death</th>
-              </tr>
-            </thead>
-             {% for person in  persons%}
-            <tbody>
-               
-                    <th scope="row"> {{person[0]}}</th>
-                    <td>{{person[1]}}</td>
-                    <td>{{person[2]}}</td>
-                    <td>{{person[3]}}</td>
-                    <td>{{person[4]}}</td>
-                    <td>{{person[5]}}</td>
-            </tbody>
-           {% endfor %}
-        </table>
         
-
-        <br><br>
-
         <div style= "margin-left: 35%;" class="container">
             
             {% for person in  persons%}

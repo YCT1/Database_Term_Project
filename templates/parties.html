@@ -49,30 +49,6 @@
         <hr>
 
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Shortname</th>
-                <th scope="col">Foundation</th>
-                <th scope="col">Dissolution</th>
-              </tr>
-            </thead>
-             {% for person in  persons%}
-            <tbody>
-               
-                    <th scope="row"> {{person[0]}}</th>
-                    <td>{{person[1]}}</td>
-                    <td>{{person[2]}}</td>
-                    <td>{{person[3]}}</td>
-                    <td>{{person[4]}}</td>
-            </tbody>
-           {% endfor %}
-        </table>
-
-
-        <br><br>
 
         <div style= "margin-left: 35%;" class="container">
             
@@ -97,10 +73,7 @@
                     
                      
                   </ul>
-                  <div class="card-body">
-                  <h6 class="card-title">Parties: </h6>
-                   
-                </div>
+                 
                  
               </div>
             </div>

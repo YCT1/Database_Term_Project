@@ -1,0 +1,158 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Turkish Elections</title>
+</head>
+
+
+
+    <div style= "margin-top: 10px;" class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+          <a class="navbar-brand" href="/">Main Page</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/persons">Persons</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/parties">Parties</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/elections">Elections</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graphs">Graphs</a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      </div>
+
+<body>
+
+
+    <div style= "margin-top: 100px;" class="container">
+        <h3>Welcome to database of</h3> 
+        <h1>Turkish Election History</h1>
+        <h5>1977-2018</h5>
+        <hr>
+        <main role="main" class="inner cover">
+            <p class="lead"></p>
+            <img width="600" height="400" style="display: block;margin-left: auto;margin-right: auto;" src="static/img/turkey.svg" alt="Card image cap">
+          </main>
+          
+          <br>
+          {% for row in  table%}
+          <div class="container">
+              
+            <div class="row">
+            {% if row[0]%}
+              <div class="col-sm">
+                <div class="card">
+                    <a href="/parties/{{row[0][1]}}">
+                    <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[0][0])}} alt="Card image cap">
+                    </a>
+                </div>
+              </div>
+            {% endif%}
+            {% if row[1]%}
+              <div class="col-sm">
+                <a href="/parties/{{row[1][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[1][0])}} alt="Card image cap"></div>
+                </a>  
+            </div>
+            {% endif%}
+            {% if row[2]%}
+              <div class="col-sm">
+                <a href="/parties/{{row[2][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[2][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+            {% endif%}
+            {% if row[3]%}
+              <div class="col-sm">
+                <a href="/parties/{{row[3][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[3][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+              {% endif%}
+              {% if row[4]%}
+              <div class="col-sm">
+                <a href="/parties/{{row[4][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[4][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+              {% endif%}
+            </div>
+
+            <br>
+            {% endfor %}
+          </div>
+    </div>
+
+    <br>
+    <h3>Persons</h3>
+    <hr>
+
+    {% for row in  persontable%}
+          <div class="container">
+              
+            <div class="row">
+            {% if row[0]%}
+              <div class="col-sm">
+                <div class="card">
+                    <a href="/persons/{{row[0][1]}}">
+                    <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[0][0])}} alt="Card image cap">
+                    </a>
+                </div>
+              </div>
+            {% endif%}
+            {% if row[1]%}
+              <div class="col-sm">
+                <a href="/persons/{{row[1][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[1][0])}} alt="Card image cap"></div>
+                </a>  
+            </div>
+            {% endif%}
+            {% if row[2]%}
+              <div class="col-sm">
+                <a href="/persons/{{row[2][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[2][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+            {% endif%}
+            {% if row[3]%}
+              <div class="col-sm">
+                <a href="/persons/{{row[3][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[3][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+              {% endif%}
+              {% if row[4]%}
+              <div class="col-sm">
+                <a href="/persons/{{row[4][1]}}">
+                <div class="card"> <img width="128" height="128" style="display: block;margin-left: auto;margin-right: auto;" src={{url_for('static', filename=row[4][0])}} alt="Card image cap"></div>
+            </a>   
+            </div>
+              {% endif%}
+            </div>
+
+            <br>
+            {% endfor %}
+          </div>
+    </div>
+
+    <div style= "margin-top: 100px;" class="container">
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Done by Yekta Can Tursun, 150170105</p>
+        </div>
+      </footer>
+    </div>
+</body>
