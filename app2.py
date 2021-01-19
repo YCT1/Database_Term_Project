@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,flash
 from flask_mysqldb import MySQL
 import mysql.connector
 import yaml
-
+from datetime import datetime
 app = Flask(__name__)
 
 db = mysql.connector.connect(
@@ -12,7 +12,7 @@ db = mysql.connector.connect(
    database='databasehomework'
 )
 mysql = MySQL(app)
-
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/persons')
 def users():
@@ -85,16 +85,31 @@ def ind_elections(id):
     election = cur.fetchone()
     return render_template("ind_presidential_election.html",candicates=candicates, election=election )
 
-@app.route("/elections/general/<string:id>")
+@app.route("/elections/general/<string:id>", methods=['GET', 'POST'])
 def ind_general_elections(id):
+    if request.method == 'POST':
+        userDetails = request.form
+        name = userDetails['name']
+        comment = userDetails['comment']
+        
+        if name == "" or comment == "":
+            flash("Please fill your name or comment","error")
+        else:
+            today = datetime.now()
+            cur = db.cursor()
+            cur.execute("INSERT INTO comments(name, comment,datetime, categoryid, category) VALUES(%s, %s,%s,%s,%s)",(name, comment,today,1,id))
+            db.commit()
+            cur.close()
     cur = db.cursor()
     Command = "SELECT percantage,vote,seat,parties.name,shortname, parties.img,parties.idParties, persons.name, persons.surname, persons.img,persons.idpersons FROM ge_result INNER JOIN parties ON (ge_result.partyid=parties.idParties) INNER JOIN persons ON (ge_result.personid = persons.idpersons) WHERE(election="+str(id)+")"
     cur.execute(Command)
     results = cur.fetchall()
-
     cur.execute("SELECT * FROM generalelections WHERE (id ="+ str(id)+" )")
     election = cur.fetchone()
-    return render_template("ind_general_election.html", results = results,election=election)
+
+    cur.execute("SELECT name,comment,datetime FROM comments WHERE(categoryid=1 AND category="+str(id)+")")
+    comments = cur.fetchall()
+    return render_template("ind_general_election.html", results = results,election=election,comments=comments)
 
 @app.route("/graphs")
 def graphs():
@@ -103,6 +118,20 @@ def graphs():
     cur.execute("SELECT id, date FROM generalelections")
     elections = cur.fetchall()
     return render_template("graphs.html", elections=elections)
+
+@app.route("/debug", methods=['GET', 'POST'])
+def d_comment():
+    if request.method == 'POST':
+        userDetails = request.form
+        name = userDetails['name']
+        comment = userDetails['comment']
+        today = datetime.now()
+        cur = db.cursor()
+        cur.execute("INSERT INTO comments(name, comment,datetime) VALUES(%s, %s,%s)",(name, comment,today))
+        db.commit()
+        cur.close()
+    return render_template("index4.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
 
