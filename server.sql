@@ -34,7 +34,8 @@ INSERT INTO `comments` (`id`, `categoryid`, `category`, `name`, `comment`, `date
 	(3, 0, 0, 'fef', 'fesfe', '2021-01-19 00:00:00'),
 	(27, 2, 3, 'Yekta Can Tursun', 'MHP is <3', '2021-01-19 14:14:00'),
 	(28, 2, 16, 'Mesut Gün', 'ANAP is the best', '2021-01-19 14:16:18'),
-	(29, 2, 4, 'Hamdi ', 'Refahın vakti geldi', '2021-01-19 14:16:42');
+	(29, 2, 4, 'Hamdi ', 'Refahın vakti geldi', '2021-01-19 14:16:42'),
+	(30, 2, 9, 'Deneme', 'This is a test comment\r\n', '2021-01-19 17:41:49');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 
 -- Dumping structure for table databasehomework.generalelections
@@ -46,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `generalelections` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.generalelections: ~10 rows (approximately)
+-- Dumping data for table databasehomework.generalelections: ~11 rows (approximately)
 /*!40000 ALTER TABLE `generalelections` DISABLE KEYS */;
 INSERT INTO `generalelections` (`id`, `date`, `voted`, `Turnout`) VALUES
 	(1, '2018-06-24', 59367469, 86.22),
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `ge_result` (
   CONSTRAINT `partyid` FOREIGN KEY (`partyid`) REFERENCES `parties` (`idParties`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.ge_result: ~51 rows (approximately)
+-- Dumping data for table databasehomework.ge_result: ~55 rows (approximately)
 /*!40000 ALTER TABLE `ge_result` DISABLE KEYS */;
 INSERT INTO `ge_result` (`id`, `percantage`, `vote`, `seat`, `personid`, `partyid`, `election`) VALUES
 	(1, 42.56, 21338693, 295, 1, 1, 1),
@@ -153,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   CONSTRAINT `person` FOREIGN KEY (`person`) REFERENCES `persons` (`idpersons`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.members: ~37 rows (approximately)
+-- Dumping data for table databasehomework.members: ~39 rows (approximately)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
 INSERT INTO `members` (`members_id`, `started`, `ended`, `party`, `person`) VALUES
 	(1, '1983-12-23', '1998-12-23', 4, 1),
@@ -208,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `parties` (
   PRIMARY KEY (`idParties`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
--- Dumping data for table databasehomework.parties: ~19 rows (approximately)
+-- Dumping data for table databasehomework.parties: ~21 rows (approximately)
 /*!40000 ALTER TABLE `parties` DISABLE KEYS */;
 INSERT INTO `parties` (`idParties`, `name`, `shortname`, `foundation`, `dissolution`, `img`) VALUES
 	(1, 'AK Parti', 'AKP', '2001-08-14', NULL, 'img/akp.jpg'),
