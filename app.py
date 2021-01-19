@@ -52,7 +52,7 @@ def d_individual_parties(id):
     cur.execute("SELECT * FROM parties WHERE idParties ="+str(id))
     party = cur.fetchone()
 
-    cur.execute("SELECT * FROM members INNER JOIN persons ON members.person = persons.idpersons WHERE party ="+str(id))
+    cur.execute("SELECT * FROM members INNER JOIN persons ON members.person = persons.idpersons WHERE (party ="+str(id)+") ORDER BY started")
     members = cur.fetchall()
 
     cur.execute("SELECT percantage, seat, date, generalelections.id FROM ge_result INNER JOIN generalelections ON (ge_result.election=generalelections.id) WHERE(partyid="+str(id)+") ORDER BY date DESC")
